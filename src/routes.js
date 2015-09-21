@@ -2,6 +2,7 @@ import React from 'react';
 import {Route} from 'react-router';
 import {
     App,
+    Articles,
     Home,
     Widgets,
     About,
@@ -16,6 +17,7 @@ export default function(store) {
   return (
     <Route component={App}>
       <Route path="/" component={Home}/>
+      <Route path="/articles" component={Articles}/>
       <Route path="/widgets" component={Widgets}/>
       <Route path="/about" component={About}/>
       <Route path="/login" component={Login}/>

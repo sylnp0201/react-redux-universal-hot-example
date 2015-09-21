@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
+import articles from './articles';
 import counter from './counter';
 import {reducer as form} from 'redux-form';
 import info from './info';
@@ -11,5 +12,6 @@ export default combineReducers({
   counter,
   form,
   info,
-  widgets
+  widgets,
+  articles
 });
