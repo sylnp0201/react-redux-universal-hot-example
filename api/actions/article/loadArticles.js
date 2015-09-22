@@ -1,7 +1,7 @@
 import request from 'request';
 
 export function getArticles(req, cb) {
-  return request.get("http://staging-bview-service-adapter.bdns.bloomberg.com:8080/articles", { timeout: 5000 }, cb);
+  return request.get("http://www.bloombergview.com/api/articles", { timeout: 5000 }, cb);
 }
 
 export default function load(req, params) {

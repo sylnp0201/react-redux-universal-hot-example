@@ -1,5 +1,6 @@
 export App from './App/App';
 export Articles from './Articles/Articles';
+export ArticleView from './ArticleView/ArticleView';
 export Home from './Home/Home';
 export Widgets from './Widgets/Widgets';
 export About from './About/About';

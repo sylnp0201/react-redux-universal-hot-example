@@ -18,8 +18,19 @@ import ArticleListItem from './ArticleListItem';
 export default class Articles extends Component {
   static propTypes = {
     articles: PropTypes.any.isRequired,
-    selectArticle: PropTypes.func.isRequired
+    selectArticle: PropTypes.func.isRequired,
+    children: PropTypes.object.isRequired
   }
+
+  // onArticleSelect(slug) {
+  //   const { articles, selectArticle } = this.props;
+
+  //   if (articles.selectedArticle === slug) {
+  //     selectArticle(null);
+  //   } else {
+  //     selectArticle(slug);
+  //   }
+  // }
 
   static fetchData(store) {
     if (!isLoaded(store.getState())) {
@@ -28,21 +39,25 @@ export default class Articles extends Component {
   }
 
   render() {
-    const { articles, selectArticle } = this.props;
+    const { articles } = this.props;
     const selectedArticle = articles.selectedArticle;
     const articleList = articles.articleList;
+    const articleItem = articles.articleItem;
 
     return (
-      <ul>
-        {articleList.map((article, index) =>
-          <ArticleListItem
-            article={article}
-            selectedArticle={selectedArticle}
-            selectArticle={selectArticle}
-            key={index}
-          />
-        )}
-      </ul>
+      <div>
+        <ul>
+          {articleList.map((article, index) =>
+            <ArticleListItem
+              article={article}
+              selectedArticle={selectedArticle}
+              articleItem={articleItem}
+              key={index}
+            />
+          )}
+        </ul>
+        {this.props.children}
+      </div>
     );
   }
 }

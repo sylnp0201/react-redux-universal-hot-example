@@ -1,22 +1,15 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router';
 
 export default class ArticleListItem extends Component {
   static propTypes = {
     article: PropTypes.any.isRequired,
-    selectArticle: PropTypes.func.isRequired,
-    selectedArticle: PropTypes.string
-  }
-
-  handleClick(slug) {
-    const { selectArticle } = this.props;
-
-    return () => {
-      selectArticle(String(slug));
-    };
+    selectedArticle: PropTypes.string,
+    articleItem: PropTypes.object
   }
 
   render() {
-    const {article, selectedArticle} = this.props;
+    const {article, selectedArticle, articleItem} = this.props;
     let artcileView;
     if (article.slug === selectedArticle) {
       const image = article.attachments.images[0];
@@ -25,13 +18,16 @@ export default class ArticleListItem extends Component {
 
         artcileView = (<div className="article-body">
           <img src={imageUrl} />
+          <div className='article-view-body' dangerouslySetInnerHTML={{__html: articleItem.body}} />
         </div>);
       }
     }
 
     return (
       <li ref={`story-item-${article.slug}`}>
-        <h3 onClick={::this.handleClick(article.slug)}>{article.headline}</h3>
+        <Link to={`/articles/${article.slug}`}>
+          <h3>{article.headline}</h3>
+        </Link>
         <div>{article.contributor}</div>
         { artcileView }
       </li>

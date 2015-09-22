@@ -17,13 +17,22 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
-      return {
+      const newState = {
         ...state,
         loading: false,
         loaded: true,
-        articleList: action.result.articles,
         error: null
       };
+
+      if (action.result && action.result.articles) {
+        newState.articleList = action.result.articles;
+      } else {
+        const article = action.result;
+        newState.articleItem = article;
+        newState.selectedArticle = article.slug;
+      }
+
+      return newState;
     case LOAD_FAIL:
       return {
         ...state,
@@ -53,7 +62,14 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/article/loadArticles')
+    promise: (client) => client.get('/article/loadArticles').then()
+  };
+}
+
+export function loadArticleItem(slug) {
+  return {
+    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+    promise: (client) => client.get(`/article/loadArticle/${slug}`)
   };
 }
 

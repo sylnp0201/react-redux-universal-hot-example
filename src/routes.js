@@ -3,6 +3,7 @@ import {Route} from 'react-router';
 import {
     App,
     Articles,
+    ArticleView,
     Home,
     Widgets,
     About,
@@ -17,7 +18,9 @@ export default function(store) {
   return (
     <Route component={App}>
       <Route path="/" component={Home}/>
-      <Route path="/articles" component={Articles}/>
+      <Route path="articles" component={Articles}>
+        <Route path="*" component={ArticleView} />
+      </Route>
       <Route path="/widgets" component={Widgets}/>
       <Route path="/about" component={About}/>
       <Route path="/login" component={Login}/>
