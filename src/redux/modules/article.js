@@ -39,10 +39,9 @@ export function isLoaded(globalState) {
   return globalState.article && globalState.article.loaded;
 }
 
-export function load(slug) {
+export function load(slug, isArticlePage) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.get(`/article/loadArticle/${slug}`)
   };
 }
-

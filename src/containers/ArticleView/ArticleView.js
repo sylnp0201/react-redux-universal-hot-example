@@ -5,9 +5,7 @@ import {isLoaded, loadArticleItem as loadArticle} from 'redux/modules/articles';
 import * as articleActions from 'redux/modules/articles';
 
 @connect(
-  state => ({
-    article: state.articles.articleItem
-  }),
+  () => ({}),
   dispatch => ({
     ...bindActionCreators({
       ...articleActions
@@ -29,7 +27,20 @@ export default class ArticleView extends Component {
   }
 
   render() {
-    return (<div className="article-view"></div>);
+    const { article } = this.props;
+
+    const image = article.attachments.images[0];
+    let lede;
+
+    if (image) {
+      const imageUrl = image.thumbnails[0].url;
+      lede = <img src={imageUrl} />;
+    }
+
+    return (<div className="article-view">
+      {lede}
+      <div className="article-body" dangerouslySetInnerHTML={{__html: article.body}}></div>
+    </div>);
   }
 }
 

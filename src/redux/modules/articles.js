@@ -73,3 +73,7 @@ export function loadArticleItem(slug) {
   };
 }
 
+export function isSlug(slug) {
+  return typeof slug === 'string' && /\d{4}\-\d{2}\-\d{2}\/.+/.test(slug);
+}
+
